@@ -1,4 +1,5 @@
-<nav>
+<!-- Navegación principal de la SPA -->
+<nav aria-label="Navegación principal">
   <ul>
     <li><a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
     <li><a routerLink="/servicios" routerLinkActive="activo">Servicios</a></li>
@@ -9,6 +10,7 @@
   </button>
 </nav>
 
+<!-- Contenedor donde Angular renderiza el componente de cada ruta -->
 <main>
   <router-outlet></router-outlet>
 </main>
