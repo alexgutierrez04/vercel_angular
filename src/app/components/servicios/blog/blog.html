@@ -1,43 +1,124 @@
-<div class="blog-container">
+<div class="blog-container" role="region" aria-label="Blog dinámico de publicaciones">
   <h2>Blog</h2>
+  <p class="contador-posts" aria-live="polite">{{ contador() }}</p>
 
   <!-- Formulario nuevo post -->
   <div class="formulario-post">
     <h3>Crear nueva publicación</h3>
-    <input type="text" [(ngModel)]="titulo" placeholder="Título del post">
-    <textarea [(ngModel)]="descripcion" placeholder="Descripción del post..." rows="3"></textarea>
-    <button (click)="agregarPost()">Publicar</button>
+    <label for="titulo-post">Título</label>
+    <input
+      id="titulo-post"
+      type="text"
+      [(ngModel)]="titulo"
+      placeholder="Título del post"
+      [attr.aria-invalid]="titulo.length > 0 && !tituloValido"
+      aria-describedby="titulo-error"
+    />
+    <span class="error" id="titulo-error" *ngIf="titulo.length > 0 && !tituloValido">
+      El título debe tener al menos 3 caracteres.
+    </span>
+
+    <label for="descripcion-post">Descripción</label>
+    <textarea
+      id="descripcion-post"
+      [(ngModel)]="descripcion"
+      placeholder="Descripción del post..."
+      rows="3"
+      [attr.aria-invalid]="descripcion.length > 0 && !descripcionValida"
+      aria-describedby="descripcion-error"
+    ></textarea>
+    <span class="error" id="descripcion-error" *ngIf="descripcion.length > 0 && !descripcionValida">
+      La descripción debe tener al menos 10 caracteres.
+    </span>
+
+    <button type="button" (click)="agregarPost()" [disabled]="!formularioValido">
+      Publicar
+    </button>
+  </div>
+
+  <!-- Búsqueda -->
+  <div class="busqueda-posts" role="search">
+    <label for="buscar-post">Buscar publicaciones</label>
+    <input
+      id="buscar-post"
+      type="search"
+      [ngModel]="busqueda()"
+      (ngModelChange)="actualizarBusqueda($event)"
+      placeholder="Buscar por título o descripción..."
+    />
   </div>
 
   <!-- Lista de posts -->
   <div class="lista-posts">
-    <p *ngIf="posts.length === 0" class="sin-posts">No hay publicaciones todavía. ¡Crea la primera!</p>
+    <p *ngIf="posts().length === 0" class="sin-posts">
+      No hay publicaciones todavía. ¡Crea la primera!
+    </p>
+
+    <p *ngIf="posts().length > 0 && postsVisibles().length === 0" class="sin-posts">
+      No se encontraron publicaciones con ese criterio de búsqueda.
+    </p>
 
     <div
-      *ngFor="let post of posts"
+      *ngFor="let post of postsVisibles()"
       class="post-card"
-      [ngClass]="{'destacado': esDestacado(post.id)}"
+      [ngClass]="{ destacado: post.destacado }"
     >
       <!-- Modo edición -->
       <div *ngIf="postEditando?.id === post.id" class="edicion">
-        <input type="text" [(ngModel)]="postEditando.titulo">
-        <textarea [(ngModel)]="postEditando.descripcion" rows="3"></textarea>
+        <label [for]="'editar-titulo-' + post.id">Título</label>
+        <input
+          [id]="'editar-titulo-' + post.id"
+          type="text"
+          [(ngModel)]="postEditando!.titulo"
+        />
+        <label [for]="'editar-descripcion-' + post.id">Descripción</label>
+        <textarea
+          [id]="'editar-descripcion-' + post.id"
+          [(ngModel)]="postEditando!.descripcion"
+          rows="3"
+        ></textarea>
         <div class="botones">
-          <button class="btn-guardar" (click)="guardarEdicion()">Guardar</button>
-          <button class="btn-cancelar" (click)="cancelarEdicion()">Cancelar</button>
+          <button type="button" class="btn-guardar" (click)="guardarEdicion()">
+            Guardar
+          </button>
+          <button type="button" class="btn-cancelar" (click)="cancelarEdicion()">
+            Cancelar
+          </button>
         </div>
       </div>
 
       <!-- Modo visualización -->
       <div *ngIf="postEditando?.id !== post.id">
-        <span *ngIf="esDestacado(post.id)" class="badge">Destacado</span>
+        <span *ngIf="post.destacado" class="badge">Destacado</span>
+        <time class="fecha-post" [attr.datetime]="post.fecha">
+          {{ post.fecha | date: 'dd/MM/yyyy HH:mm' }}
+        </time>
         <h3>{{ post.titulo }}</h3>
         <p>{{ post.descripcion }}</p>
         <div class="botones">
-          <button class="btn-editar" (click)="editarPost(post)">Editar</button>
-          <button class="btn-eliminar" (click)="eliminarPost(post.id)">Eliminar</button>
-          <button class="btn-destacar" (click)="toggleDestacado(post.id)">
-            {{ esDestacado(post.id) ? '★ Quitar destacado' : '☆ Destacar' }}
+          <button
+            type="button"
+            class="btn-editar"
+            (click)="editarPost(post)"
+            [attr.aria-label]="'Editar ' + post.titulo"
+          >
+            Editar
+          </button>
+          <button
+            type="button"
+            class="btn-eliminar"
+            (click)="eliminarPost(post.id)"
+            [attr.aria-label]="'Eliminar ' + post.titulo"
+          >
+            Eliminar
+          </button>
+          <button
+            type="button"
+            class="btn-destacar"
+            (click)="toggleDestacado(post.id)"
+            [attr.aria-pressed]="post.destacado"
+          >
+            {{ post.destacado ? '★ Quitar destacado' : '☆ Destacar' }}
           </button>
         </div>
       </div>
