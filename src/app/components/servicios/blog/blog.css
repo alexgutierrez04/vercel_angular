@@ -6,16 +6,24 @@
 
 .blog-container h2 {
   font-size: 1.8rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   color: var(--color-texto);
   text-align: center;
+}
+
+.contador-posts {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-secundario);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
 }
 
 .formulario-post {
   background-color: var(--color-formulario-fondo);
   padding: 1.5rem;
   border-radius: 10px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .formulario-post h3 {
@@ -23,8 +31,16 @@
   color: var(--color-texto);
 }
 
+.formulario-post label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: var(--color-texto);
+}
+
 .formulario-post input,
-.formulario-post textarea {
+.formulario-post textarea,
+.busqueda-posts input {
   width: 100%;
   padding: 0.7rem;
   margin-bottom: 0.8rem;
@@ -38,8 +54,17 @@
 }
 
 .formulario-post input:focus,
-.formulario-post textarea:focus {
+.formulario-post textarea:focus,
+.busqueda-posts input:focus {
   border-color: var(--color-primario);
+}
+
+.error {
+  display: block;
+  color: #f38ba8;
+  font-size: 0.85rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.6rem;
 }
 
 .formulario-post button {
@@ -50,11 +75,27 @@
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s, opacity 0.3s;
 }
 
-.formulario-post button:hover {
+.formulario-post button:hover:not(:disabled) {
   background-color: var(--color-secundario);
+}
+
+.formulario-post button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.busqueda-posts {
+  margin-bottom: 1.5rem;
+}
+
+.busqueda-posts label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: var(--color-texto);
 }
 
 .sin-posts {
@@ -81,6 +122,13 @@
   background-color: var(--color-formulario-fondo);
 }
 
+.fecha-post {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--color-secundario);
+  margin-bottom: 0.5rem;
+}
+
 .post-card h3 {
   margin-bottom: 0.5rem;
   color: var(--color-texto);
@@ -100,6 +148,25 @@
   font-weight: bold;
   margin-bottom: 0.5rem;
   display: inline-block;
+}
+
+.edicion label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: var(--color-texto);
+}
+
+.edicion input,
+.edicion textarea {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 0.8rem;
+  border: 2px solid var(--color-input-borde);
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: var(--color-card);
+  color: var(--color-texto);
 }
 
 .botones {
