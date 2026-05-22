@@ -1,20 +1,54 @@
-<div class="galeria-container">
+<div
+  class="galeria-container"
+  role="region"
+  aria-roledescription="galería"
+  aria-label="Galería de imágenes interactiva"
+>
   <h2>Galería de Imágenes</h2>
 
-  <!-- Imagen principal -->
-  <div class="imagen-principal">
-    <img [src]="imagenSeleccionada.src" [alt]="imagenSeleccionada.alt">
-    <p class="pie-foto">{{ imagenSeleccionada.alt }}</p>
+  <div class="visor">
+    <button
+      type="button"
+      class="btn-nav btn-anterior"
+      (click)="anterior()"
+      aria-label="Imagen anterior"
+    >
+      ‹
+    </button>
+
+    <div class="imagen-principal">
+      <img
+        [src]="imagenSeleccionada().src"
+        [alt]="imagenSeleccionada().alt"
+      />
+      <p class="pie-foto">{{ imagenSeleccionada().alt }}</p>
+      <p class="contador" aria-live="polite">{{ contador() }}</p>
+    </div>
+
+    <button
+      type="button"
+      class="btn-nav btn-siguiente"
+      (click)="siguiente()"
+      aria-label="Imagen siguiente"
+    >
+      ›
+    </button>
   </div>
 
-  <!-- Miniaturas -->
-  <div class="miniaturas">
-    <img
+  <p class="ayuda-teclado">Usa las flechas ← → del teclado para navegar</p>
+
+  <div class="miniaturas" role="list" aria-label="Miniaturas de la galería">
+    <button
       *ngFor="let imagen of imagenes"
-      [src]="imagen.miniatura"
-      [alt]="imagen.alt"
-      [ngClass]="{'seleccionada': imagen.id === imagenSeleccionada.id}"
+      type="button"
+      class="miniatura-btn"
+      role="listitem"
+      [class.seleccionada]="esSeleccionada(imagen)"
+      [attr.aria-label]="'Ver ' + imagen.alt"
+      [attr.aria-current]="esSeleccionada(imagen) ? 'true' : null"
       (click)="seleccionarImagen(imagen)"
     >
+      <img [src]="imagen.miniatura" [alt]="''" aria-hidden="true" />
+    </button>
   </div>
 </div>
