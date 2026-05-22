@@ -2,11 +2,14 @@
   <h2>Servicios</h2>
   <p>Explora nuestra galería y nuestro blog de publicaciones.</p>
 
-  <div class="seccion">
-    <app-galeria></app-galeria>
-  </div>
+  <!-- Subnavegación: rutas hijas bajo /servicios -->
+  <nav class="subnav" aria-label="Secciones de servicios">
+    <a routerLink="galeria" routerLinkActive="activo">Galería</a>
+    <a routerLink="blog" routerLinkActive="activo">Blog</a>
+  </nav>
 
-  <div class="seccion">
-    <app-blog></app-blog>
+  <!-- Contenido dinámico según la ruta hija activa -->
+  <div class="contenido-ruta">
+    <router-outlet></router-outlet>
   </div>
 </section>

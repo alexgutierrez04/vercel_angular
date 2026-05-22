@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { Galeria } from './galeria/galeria';
-import { Blog } from './blog/blog';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-servicios',
   standalone: true,
-  imports: [Galeria, Blog],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './servicios.html',
-  styleUrl: './servicios.css'
+  styleUrl: './servicios.css',
 })
 export class Servicios {}

@@ -25,12 +25,16 @@
 }
 
 .card {
+  display: block;
   background-color: var(--color-card);
   border-radius: 10px;
   padding: 1.5rem;
   width: 220px;
   box-shadow: 0 2px 8px var(--color-card-sombra);
   transition: transform 0.3s;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .card:hover {
