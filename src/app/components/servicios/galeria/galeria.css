@@ -1,5 +1,5 @@
 .galeria-container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   text-align: center;
 }
@@ -10,8 +10,16 @@
   color: var(--color-texto);
 }
 
+.visor {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
 .imagen-principal {
-  margin-bottom: 1.5rem;
+  flex: 1;
+  min-width: 0;
 }
 
 .imagen-principal img {
@@ -28,6 +36,44 @@
   font-style: italic;
 }
 
+.contador {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: var(--color-secundario);
+  font-weight: 600;
+}
+
+.ayuda-teclado {
+  font-size: 0.85rem;
+  color: var(--color-texto);
+  opacity: 0.75;
+  margin-bottom: 1.25rem;
+}
+
+.btn-nav {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-primario);
+  color: var(--color-nav);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.btn-nav:hover {
+  transform: scale(1.08);
+  opacity: 0.9;
+}
+
+.btn-nav:focus-visible {
+  outline: 2px solid var(--color-secundario);
+  outline-offset: 2px;
+}
+
 .miniaturas {
   display: flex;
   gap: 1rem;
@@ -35,21 +81,33 @@
   flex-wrap: wrap;
 }
 
-.miniaturas img {
-  width: 120px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 8px;
-  cursor: pointer;
+.miniatura-btn {
+  padding: 0;
   border: 3px solid transparent;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
   transition: border 0.3s, transform 0.3s;
 }
 
-.miniaturas img:hover {
+.miniatura-btn img {
+  display: block;
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.miniatura-btn:hover {
   transform: scale(1.05);
 }
 
-.miniaturas img.seleccionada {
+.miniatura-btn.seleccionada {
   border-color: var(--color-primario);
   transform: scale(1.08);
+}
+
+.miniatura-btn:focus-visible {
+  outline: 2px solid var(--color-secundario);
+  outline-offset: 2px;
 }
