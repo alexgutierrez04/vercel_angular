@@ -1,0 +1,20 @@
+<div class="galeria-container">
+  <h2>Galería de Imágenes</h2>
+
+  <!-- Imagen principal -->
+  <div class="imagen-principal">
+    <img [src]="imagenSeleccionada.src" [alt]="imagenSeleccionada.alt">
+    <p class="pie-foto">{{ imagenSeleccionada.alt }}</p>
+  </div>
+
+  <!-- Miniaturas -->
+  <div class="miniaturas">
+    <img
+      *ngFor="let imagen of imagenes"
+      [src]="imagen.miniatura"
+      [alt]="imagen.alt"
+      [ngClass]="{'seleccionada': imagen.id === imagenSeleccionada.id}"
+      (click)="seleccionarImagen(imagen)"
+    >
+  </div>
+</div>

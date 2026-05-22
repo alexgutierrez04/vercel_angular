@@ -1,0 +1,77 @@
+.formulario-container {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.exito {
+  background-color: #a6e3a1;
+  color: #1e1e2e;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+
+.campo label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--color-texto);
+}
+
+.campo input,
+.campo textarea {
+  padding: 0.7rem;
+  border: 2px solid var(--color-input-borde);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.3s;
+  outline: none;
+  background-color: var(--color-card);
+  color: var(--color-texto);
+}
+
+.campo input:focus,
+.campo textarea:focus {
+  border-color: #89b4fa;
+}
+
+.campo.valido input,
+.campo.valido textarea {
+  border-color: #a6e3a1;
+}
+
+.campo.invalido input,
+.campo.invalido textarea {
+  border-color: #f38ba8;
+}
+
+.error {
+  color: #f38ba8;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: var(--color-primario);
+  color: #1e1e2e;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: var(--color-secundario);
+}

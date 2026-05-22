@@ -1,0 +1,46 @@
+<div class="blog-container">
+  <h2>Blog</h2>
+
+  <!-- Formulario nuevo post -->
+  <div class="formulario-post">
+    <h3>Crear nueva publicación</h3>
+    <input type="text" [(ngModel)]="titulo" placeholder="Título del post">
+    <textarea [(ngModel)]="descripcion" placeholder="Descripción del post..." rows="3"></textarea>
+    <button (click)="agregarPost()">Publicar</button>
+  </div>
+
+  <!-- Lista de posts -->
+  <div class="lista-posts">
+    <p *ngIf="posts.length === 0" class="sin-posts">No hay publicaciones todavía. ¡Crea la primera!</p>
+
+    <div
+      *ngFor="let post of posts"
+      class="post-card"
+      [ngClass]="{'destacado': esDestacado(post.id)}"
+    >
+      <!-- Modo edición -->
+      <div *ngIf="postEditando?.id === post.id" class="edicion">
+        <input type="text" [(ngModel)]="postEditando.titulo">
+        <textarea [(ngModel)]="postEditando.descripcion" rows="3"></textarea>
+        <div class="botones">
+          <button class="btn-guardar" (click)="guardarEdicion()">Guardar</button>
+          <button class="btn-cancelar" (click)="cancelarEdicion()">Cancelar</button>
+        </div>
+      </div>
+
+      <!-- Modo visualización -->
+      <div *ngIf="postEditando?.id !== post.id">
+        <span *ngIf="esDestacado(post.id)" class="badge">Destacado</span>
+        <h3>{{ post.titulo }}</h3>
+        <p>{{ post.descripcion }}</p>
+        <div class="botones">
+          <button class="btn-editar" (click)="editarPost(post)">Editar</button>
+          <button class="btn-eliminar" (click)="eliminarPost(post.id)">Eliminar</button>
+          <button class="btn-destacar" (click)="toggleDestacado(post.id)">
+            {{ esDestacado(post.id) ? '★ Quitar destacado' : '☆ Destacar' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

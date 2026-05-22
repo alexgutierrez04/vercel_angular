@@ -1,0 +1,16 @@
+.contacto {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contacto h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-texto);
+}
+
+.contacto p {
+  color: var(--color-texto);
+  margin-bottom: 2rem;
+}

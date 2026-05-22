@@ -1,0 +1,22 @@
+.servicios {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.servicios h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-texto);
+}
+
+.servicios p {
+  color: var(--color-texto);
+  margin-bottom: 2rem;
+}
+
+.seccion {
+  margin-bottom: 3rem;
+  border-top: 2px solid var(--color-input-borde);
+  padding-top: 2rem;
+}

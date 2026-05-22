@@ -1,0 +1,53 @@
+nav {
+  background-color: var(--color-nav);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: var(--color-nav-texto);
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+nav a:hover {
+  background-color: #313244;
+}
+
+nav a.activo {
+  background-color: var(--color-primario);
+  color: #1e1e2e;
+  font-weight: bold;
+}
+
+.btn-tema {
+  background-color: var(--color-primario);
+  color: #1e1e2e;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-tema:hover {
+  background-color: var(--color-secundario);
+}
+
+main {
+  padding: 2rem;
+}
