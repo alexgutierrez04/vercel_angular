@@ -72,6 +72,19 @@ button {
   transition: background 0.3s;
 }
 
-button:hover {
+button:hover:not(:disabled) {
   background-color: var(--color-secundario);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.contador {
+  font-size: 0.8rem;
+  color: var(--color-texto);
+  opacity: 0.7;
+  margin-top: 0.25rem;
+  text-align: right;
 }

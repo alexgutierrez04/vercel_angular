@@ -1,42 +1,83 @@
 <div class="formulario-container">
 
-  <div class="exito" *ngIf="enviado">
-     ¡Mensaje enviado correctamente!
+  <div class="exito" *ngIf="enviado" role="status" aria-live="polite">
+    ¡Mensaje enviado correctamente!
   </div>
 
-  <form [formGroup]="formularioContacto" (ngSubmit)="onSubmit()">
+  <form [formGroup]="formularioContacto" (ngSubmit)="onSubmit()" novalidate>
 
-    <!-- Nombre -->
-    <div class="campo" [class.valido]="nombre?.valid && nombre?.touched" [class.invalido]="nombre?.invalid && nombre?.touched">
+    <!-- Campo nombre -->
+    <div
+      class="campo"
+      [class.valido]="nombre?.valid && nombre?.touched"
+      [class.invalido]="nombre?.invalid && nombre?.touched"
+    >
       <label for="nombre">Nombre</label>
-      <input id="nombre" type="text" formControlName="nombre" placeholder="Tu nombre">
-      <span class="error" *ngIf="nombre?.invalid && nombre?.touched">
+      <input
+        id="nombre"
+        type="text"
+        formControlName="nombre"
+        placeholder="Tu nombre"
+        autocomplete="name"
+        [attr.aria-invalid]="nombre?.invalid && nombre?.touched"
+        aria-describedby="nombre-error"
+      />
+      <span class="error" id="nombre-error" *ngIf="nombre?.invalid && nombre?.touched">
         <span *ngIf="nombre?.errors?.['required']">El nombre es obligatorio.</span>
         <span *ngIf="nombre?.errors?.['minlength']">Mínimo 3 caracteres.</span>
+        <span *ngIf="nombre?.errors?.['maxlength']">Máximo 50 caracteres.</span>
+        <span *ngIf="nombre?.errors?.['pattern']">Solo letras y espacios.</span>
       </span>
     </div>
 
-    <!-- Email -->
-    <div class="campo" [class.valido]="email?.valid && email?.touched" [class.invalido]="email?.invalid && email?.touched">
+    <!-- Campo email -->
+    <div
+      class="campo"
+      [class.valido]="email?.valid && email?.touched"
+      [class.invalido]="email?.invalid && email?.touched"
+    >
       <label for="email">Email</label>
-      <input id="email" type="email" formControlName="email" placeholder="tu@email.com">
-      <span class="error" *ngIf="email?.invalid && email?.touched">
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="tu@email.com"
+        autocomplete="email"
+        [attr.aria-invalid]="email?.invalid && email?.touched"
+        aria-describedby="email-error"
+      />
+      <span class="error" id="email-error" *ngIf="email?.invalid && email?.touched">
         <span *ngIf="email?.errors?.['required']">El email es obligatorio.</span>
         <span *ngIf="email?.errors?.['email']">Introduce un email válido.</span>
       </span>
     </div>
 
-    <!-- Mensaje -->
-    <div class="campo" [class.valido]="mensaje?.valid && mensaje?.touched" [class.invalido]="mensaje?.invalid && mensaje?.touched">
+    <!-- Campo mensaje -->
+    <div
+      class="campo"
+      [class.valido]="mensaje?.valid && mensaje?.touched"
+      [class.invalido]="mensaje?.invalid && mensaje?.touched"
+    >
       <label for="mensaje">Mensaje</label>
-      <textarea id="mensaje" formControlName="mensaje" placeholder="Escribe tu mensaje..." rows="5"></textarea>
-      <span class="error" *ngIf="mensaje?.invalid && mensaje?.touched">
+      <textarea
+        id="mensaje"
+        formControlName="mensaje"
+        placeholder="Escribe tu mensaje..."
+        rows="5"
+        [attr.aria-invalid]="mensaje?.invalid && mensaje?.touched"
+        aria-describedby="mensaje-error mensaje-contador"
+      ></textarea>
+      <span class="contador" id="mensaje-contador">
+        {{ mensaje?.value?.length || 0 }} / 500
+      </span>
+      <span class="error" id="mensaje-error" *ngIf="mensaje?.invalid && mensaje?.touched">
         <span *ngIf="mensaje?.errors?.['required']">El mensaje es obligatorio.</span>
         <span *ngIf="mensaje?.errors?.['minlength']">Mínimo 10 caracteres.</span>
+        <span *ngIf="mensaje?.errors?.['maxlength']">Máximo 500 caracteres.</span>
       </span>
     </div>
 
-    <button type="submit">Enviar mensaje</button>
+    <button type="submit" [disabled]="!formularioValido">Enviar mensaje</button>
 
   </form>
 </div>
