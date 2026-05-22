@@ -2,6 +2,9 @@
 
 # Compiled output
 /dist
+/deploy/htdocs
+/docs/
+/scripts/generate-documentacion.mjs
 /tmp
 /out-tsc
 /bazel-out
